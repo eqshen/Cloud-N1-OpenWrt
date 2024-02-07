@@ -366,4 +366,5 @@ CONFIG_PACKAGE_shadowsocks-rust-ssserver=y
 CONFIG_PACKAGE_shadowsocksr-libev-ssr-check=y
 CONFIG_PACKAGE_vsftpd-alt=y
 CONFIG_VSFTPD_USE_UCI_SCRIPTS=y
+CONFIG_PACKAGE_kmod-rtl8821cu=y
 EOF
