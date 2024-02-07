@@ -20,6 +20,9 @@ rm -rf theme-temp
 default_theme='opentomcat'
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
 
+###临时修复阿里云webdav
+sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
+
 <<COMMENT
 # Add luci-app-vssr
 git clone https://github.com/jerrykuku/lua-maxminddb.git package-temp/lua-maxminddb
