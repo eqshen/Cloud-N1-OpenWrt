@@ -17,6 +17,7 @@ env:
   REPO_BRANCH: master
   SCRIPT_SH: script.sh
   CONFIG_SH: config.sh
+  FIXBUG_SH: fixBug.sh
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
   KERNEL_VERSION: 6.1.76
@@ -80,6 +81,11 @@ jobs:
         cd openwrt
         sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
         ./scripts/feeds update -a
+
+    - name: fixBug
+      run: |
+        chmod +x $FIXBUG_SH
+        ./$FIXBUG_SH
 
     - name: Install feeds
       run: |
