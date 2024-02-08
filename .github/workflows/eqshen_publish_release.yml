@@ -1,7 +1,8 @@
-name: publish_release
+name: Cloud N1 OpenWrt-RELEASE
 
 on:
   workflow_dispatch:
+
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -14,40 +15,39 @@ env:
   KERNEL_VERSION: 6.1.76
 
 jobs:
-  publish_openwrt:
-    name: publish openwrt
+  build_openwrt:
+    name: Build OpenWrt and release
     runs-on: ubuntu-20.04
 
     steps:
 
     - name: Disk space
-    run: |
-         echo "Free space:"
-         df -h
-    
-    - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          name: ${{ env.DATE }} ❤️ | N1-OpenWrt 自动编译打包
-          allowUpdates: true
-          tag: ${{ env.tag_name }}
-          commit: main
-          token: ${{ secrets.actions_release }}
-          body: |
-            编译使用版本:
-            ${{ env.useVersionInfo }}
+      run: |
+           echo "Free space:"
+           df -h
 
-            刷机固件简介：
-              打包日期：${{ env.PACKAGED_OUTPUTDATE }}
-              内核版本：${{ env.KERNEL_VERSION }}
-              默认IP：192.168.1.1 默认用户名密码： root/password
-          artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
+    - name: Do Create release
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ env.DATE }} ❤️ | N1-OpenWrt 自动编译打包
+        allowUpdates: true
+        tag: ${{ env.tag_name }}
+        commit: main
+        token: ${{ secrets.actions_release }}
+        body: |
+          编译使用版本:
+          ${{ env.useVersionInfo }}
 
-      - name: Remove old Releases
-        uses: dev-drprasad/delete-older-releases@v0.3.2
-        with:
-          keep_latest: 3
-          delete_tags: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.actions_release }}
-    
+          刷机固件简介：
+            打包日期：${{ env.PACKAGED_OUTPUTDATE }}
+            内核版本：${{ env.KERNEL_VERSION }}
+            默认IP：192.168.1.1 默认用户名密码： root/password
+        artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
+
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.3.2
+      with:
+        keep_latest: 3
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.actions_release }}
