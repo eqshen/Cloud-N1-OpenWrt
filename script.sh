@@ -21,10 +21,10 @@ default_theme='opentomcat'
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
 
 ###临时修复阿里云webdav
-sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
-echo 'cat xfsprogs makefile content'
-cat feeds/packages/utils/xfsprogs/Makefile
-sed -i 's/TARGET_CFLAGS += -DHAVE_MAP_SYNC/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/' feeds/packages/utils/xfsprogs/Makefile
+#sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
+#echo 'cat xfsprogs makefile content'
+#cat feeds/packages/utils/xfsprogs/Makefile
+#sed -i 's/TARGET_CFLAGS += -DHAVE_MAP_SYNC/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/' feeds/packages/utils/xfsprogs/Makefile
 
 <<COMMENT
 # Add luci-app-vssr
