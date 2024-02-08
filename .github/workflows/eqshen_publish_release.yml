@@ -18,31 +18,36 @@ jobs:
     name: publish openwrt
     runs-on: ubuntu-20.04
 
-  steps:
-  
-  - name: Create release
-      uses: ncipollo/release-action@v1
-      with:
-        name: ${{ env.DATE }} ❤️ | N1-OpenWrt 自动编译打包
-        allowUpdates: true
-        tag: ${{ env.tag_name }}
-        commit: main
-        token: ${{ secrets.actions_release }}
-        body: |
-          编译使用版本:
-          ${{ env.useVersionInfo }}
+    steps:
 
-          刷机固件简介：
-            打包日期：${{ env.PACKAGED_OUTPUTDATE }}
-            内核版本：${{ env.KERNEL_VERSION }}
-            默认IP：192.168.1.1 默认用户名密码： root/password
-        artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
+    - name: Disk space
+    run: |
+         echo "Free space:"
+         df -h
+    
+    - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.DATE }} ❤️ | N1-OpenWrt 自动编译打包
+          allowUpdates: true
+          tag: ${{ env.tag_name }}
+          commit: main
+          token: ${{ secrets.actions_release }}
+          body: |
+            编译使用版本:
+            ${{ env.useVersionInfo }}
 
-    - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.2
-      with:
-        keep_latest: 3
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.actions_release }}
-  
+            刷机固件简介：
+              打包日期：${{ env.PACKAGED_OUTPUTDATE }}
+              内核版本：${{ env.KERNEL_VERSION }}
+              默认IP：192.168.1.1 默认用户名密码： root/password
+          artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
+
+      - name: Remove old Releases
+        uses: dev-drprasad/delete-older-releases@v0.3.2
+        with:
+          keep_latest: 3
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.actions_release }}
+    
