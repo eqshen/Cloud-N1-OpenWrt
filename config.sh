@@ -304,6 +304,7 @@ CONFIG_PACKAGE_tini=y
 CONFIG_PACKAGE_trojan=y
 CONFIG_PACKAGE_trojan-plus=y
 CONFIG_PACKAGE_ttyd=y
+CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_unzip=y
 CONFIG_PACKAGE_uuidgen=y
 # CONFIG_PACKAGE_v2dat is not set
