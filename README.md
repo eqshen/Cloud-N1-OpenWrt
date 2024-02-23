@@ -55,6 +55,9 @@
 - 20200926 修正 `openclash` 编译错误
 - 20200727 `docker` 兼容性造成编译错误，暂不集成
 
+**补充说明**：
+- 自动打包发布上传Release包的原理是调用github提供的api接口，所以需要配置对应的token。yml中使用了 ${{ secrets.ACTIONS_RELEASE }} 变量，所以需要在项目settings -> secrets and variables -> Actions 创建 Repository secrets，key名称为ACTIONS_RELEASE，值为你自己api对应的token（这个token需要在个人主页设置中创建）。
+
 **界面截图**：
 
 ![N1_OpenWRT.png](https://github.com/huangqian8/Cloud-N1-OpenWrt/blob/main/snapshot.jpeg)
